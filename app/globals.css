@@ -1,26 +1,139 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  /* === PALETA (maqueta inicio.html, paso 2) === */
+  --color-fondo: #04060d;
+  --color-superficie: #0b111e;
+  --color-superficie-profunda: #060912;
+  --color-oro: #f2c14e;
+  --color-oro-claro: #f5cf6a;
+  --color-oro-oscuro: #c99a3a;
+  --color-cel: #5fb8e6;
+  --color-celeste: #5fb8e6;
+  --color-verde: #6fd089;
+  --color-texto: #f5f0e6;
+  --color-crema: #f5f0e6;
+  --color-gris: #8590a0;
+  --color-texto-tenue: #8590a0;
+  --color-gris-tenue: #5a6472;
+  --color-texto-secundario: #aab3c2;
+  --color-texto-sombra: #5a564c;
+  --color-borde: rgba(95, 184, 230, 0.16);
+  --color-borde-cel: rgba(95, 184, 230, 0.25);
+  --color-borde-oro: rgba(242, 193, 78, 0.35);
+  --color-borde-tenue: rgba(95, 184, 230, 0.08);
+  --color-tarjeta: rgba(11, 17, 30, 0.6);
+  --color-alerta: #ff8a4a;
+  --color-exito: #6fd089;
+
+  /* Aliases retro-compat */
+  --color-carbon: #04060d;
+  --color-carbon-claro: #0b111e;
+  --color-carbon-profundo: #060912;
+  --color-oro-brillante: #f5cf6a;
+  --color-oro-profundo: #c99a3a;
+  --color-texto-base: #f5f0e6;
+
+  /* Fuentes (cargadas vía next/font como --font-grotesk y --font-jetbrains) */
+  --font-sans: var(--font-grotesk), "Space Grotesk", system-ui, sans-serif;
+  --font-mono: var(--font-jetbrains), "JetBrains Mono", ui-monospace, monospace;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+:root {
+  color-scheme: dark;
+  /* Escala tipográfica (sistema fijo) */
+  --t-eyebrow: 13px;
+  --t-body: 16px;
+  --t-h3: 19px;
+  --t-h2: 26px;
+  --t-metric: 54px;
+  /* Espaciado en múltiplos de 8 */
+  --s1: 8px;
+  --s2: 16px;
+  --s3: 24px;
+  --s4: 32px;
+  --s5: 40px;
+  --radius: 16px;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  background: #04060d;
+  color: #f5f0e6;
+  font-family: var(--font-grotesk), "Space Grotesk", system-ui, -apple-system,
+    sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+.font-mono,
+[class*="font-mono"] {
+  font-family: var(--font-jetbrains), "JetBrains Mono", ui-monospace, monospace;
+}
+
+/* === ANIMACIONES === */
+@keyframes eg-spin {
+  to {
+    transform: rotate(360deg);
   }
 }
+@keyframes eg-spin-r {
+  to {
+    transform: rotate(-360deg);
+  }
+}
+@keyframes eg-pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.35;
+  }
+}
+@keyframes eg-blink {
+  0%,
+  100% {
+    opacity: 0.4;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+@keyframes eg-dot {
+  0%,
+  100% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+.eg-blink {
+  animation: eg-blink 2.4s ease-in-out infinite;
+}
+.eg-pulse-dot {
+  animation: eg-pulse 2s infinite;
+}
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* Focus reset para inputs propios */
+input:focus,
+textarea:focus,
+button:focus {
+  outline: none;
+}
+
+/* Scrollbar fino para chat */
+.eg-scroll::-webkit-scrollbar {
+  width: 5px;
+}
+.eg-scroll::-webkit-scrollbar-thumb {
+  background: rgba(95, 184, 230, 0.25);
+  border-radius: 4px;
 }

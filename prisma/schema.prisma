@@ -1,0 +1,52 @@
+// EmpireGrowth.AI — Modelo de datos
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Cliente {
+  id              Int      @id @default(autoincrement())
+  nombre          String
+  email           String   @unique
+  passwordHash    String
+  ghlSubaccountId String?
+  creadoEn        DateTime @default(now())
+
+  progreso  ProgresoModulo[]
+  checklist ItemChecklist[]
+}
+
+model ProgresoModulo {
+  id           Int      @id @default(autoincrement())
+  cliente      Cliente  @relation(fields: [clienteId], references: [id], onDelete: Cascade)
+  clienteId    Int
+  moduloSlug   String
+  completadoEn DateTime @default(now())
+
+  @@unique([clienteId, moduloSlug])
+}
+
+model ItemChecklist {
+  id           Int       @id @default(autoincrement())
+  cliente      Cliente   @relation(fields: [clienteId], references: [id], onDelete: Cascade)
+  clienteId    Int
+  slug         String
+  completadoEn DateTime?
+
+  @@unique([clienteId, slug])
+}
+
+// Singleton (id=1 siempre) — token OAuth de GoHighLevel
+model TokenGHL {
+  id           Int      @id @default(1)
+  accessToken  String
+  refreshToken String
+  expiresAt    DateTime
+  locationId   String
+  updatedAt    DateTime @updatedAt
+}
