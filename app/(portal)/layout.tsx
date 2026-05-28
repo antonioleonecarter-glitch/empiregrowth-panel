@@ -1,3 +1,5 @@
+export const dynamic = "force-dynamic";
+
 import { requireCliente } from "@/lib/auth";
 import MarcaEmpire from "@/components/brand/MarcaEmpire";
 
